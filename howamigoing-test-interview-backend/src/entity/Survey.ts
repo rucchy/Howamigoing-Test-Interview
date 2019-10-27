@@ -1,5 +1,5 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToMany} from "typeorm";
-import {Response} from "./Response";
+import {Answer} from "./Answer";
 import {Question} from "./Question";
 
 @Entity()
@@ -11,10 +11,12 @@ export class Survey {
     @Column()
     url: string;
 
-    @OneToMany(type => Response, response => response.survey)
-    responses: Response[];
+    @OneToMany(type => Answer, answer => answer.survey)
+    answers: Answer[];
 
-    @ManyToMany(type => Question, question => question.surveys)
+    @ManyToMany(type => Question, question => question.surveys, {
+        cascade: ["insert"]
+    })
     questions: Question[];
 
 }

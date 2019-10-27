@@ -1,6 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, OneToMany} from "typeorm";
 import {Survey} from "./Survey";
-import {QuestionResponse} from "./QuestionResponse";
+import {QuestionAnswer} from "./QuestionAnswer";
 
 export enum Types {
     TEXT = "Text",
@@ -23,10 +23,10 @@ export class Question {
     @Column("text")
     text: string;
 
-    @ManyToMany(type => Survey)
+    @ManyToMany(type => Survey, survey => survey.questions)
     @JoinTable()
     surveys: Survey[];
 
-    @OneToMany(type => QuestionResponse, questionResponse => questionResponse.question)
-    questionResponse: QuestionResponse[];
+    @OneToMany(type => QuestionAnswer, questionAnswer => questionAnswer.question)
+    questionAnswer: QuestionAnswer[];
 }
