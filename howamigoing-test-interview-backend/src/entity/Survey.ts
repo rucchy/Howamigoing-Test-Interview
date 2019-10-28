@@ -8,8 +8,11 @@ export class Survey {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({unique: true})
     url: string;
+
+    @Column()
+    title: string;
 
     @OneToMany(type => Answer, answer => answer.survey)
     answers: Answer[];

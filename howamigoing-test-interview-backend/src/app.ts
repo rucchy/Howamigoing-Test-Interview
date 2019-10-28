@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as cors from "cors";
 import * as bodyParser from  "body-parser";
 import {createConnection} from "typeorm";
 import {Request, Response} from "express";
@@ -9,9 +10,10 @@ import {Answer} from "./entity/Answer";
 createConnection().then(connection => {
     const surveyRepository = connection.getRepository(Survey);
     const answerRepository = connection.getRepository(Answer);
-    //const questionRepository = connection.getRepository(Question);
+
     // create and setup express app
     const app = express();
+    app.use(cors());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -57,5 +59,5 @@ createConnection().then(connection => {
     });
 
     // start express server
-    app.listen(3000);
+    app.listen(3001);
 });
