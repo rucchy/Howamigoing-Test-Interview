@@ -54,8 +54,18 @@ createConnection().then(connection => {
     });
 
     app.get("/answer/:id",async function(req: Request, res: Response) {
-        const results = await answerRepository.findOne(req.params.id);
-        return res.send(results);
+        const results = await connection.getRepository(Answer)
+            .createQueryBuilder("answer")
+            .select("survey.title as surveyTitle, survey.url as surveyURL, answer.email, question.type as questionType, question.text as question, questionanswer.textAnswer as answer")
+            .innerJoin("answer.questionAnswer", "questionanswer")
+            .innerJoin("questionanswer.question", "question")
+            .innerJoin("answer.survey","survey")
+            .where("answer.id = :id", {id: req.params.id})
+            .getRawMany();
+        if(results.length !== 0){
+            return res.send(results);
+        }
+        return res.send(null);
     });
 
     // start express server
