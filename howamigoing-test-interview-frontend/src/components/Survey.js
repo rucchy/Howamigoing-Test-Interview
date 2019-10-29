@@ -1,0 +1,118 @@
+import React, { Component } from 'react';
+import {Col, Row, Table} from 'reactstrap';
+import DataTable from 'react-data-table-component';
+import {Link} from "react-router-dom";
+import NoMatch from "./NoMatch";
+
+const columns = [
+    {
+        name: "ID",
+        selector: "id",
+        sortable: true,
+    },
+    {
+        name: "Email",
+        selector: "email",
+        sortable: true,
+        grow: 2
+    },
+    {
+        name: "Details",
+        selector: "details"
+    }
+];
+
+class Survey extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            survey: ""
+        };
+    }
+    componentWillMount() {
+        let url = "http://localhost:3001/survey/" + this.props.match.params.id;
+        fetch(url)
+            .then(res => res.json())
+            .then(res => this.setState({survey: res}))
+            .catch(err => err);
+    }
+
+    renderQuestions(questions){
+        return (
+            <Table striped responsive>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Question</th>
+                </tr>
+                </thead>
+                <tbody>
+                {questions.map((question, i) => {
+                    return (
+                        <tr key={i}>
+                            <th scope="row">{question.id}</th>
+                            <td>{question.type}</td>
+                            <td>{question.text}</td>
+                        </tr>
+                    )
+                })}
+                </tbody>
+            </Table>
+        )
+    }
+
+    renderAnswers(answers){
+        let array = answers.map((answer, i) =>{
+           if(!answer.email){
+               answer.email = "Anonimous";
+           }
+            answer.details = (<Link to={{
+                pathname: `/answer/${answer.id}`,
+            }}>See Answer</Link>)
+           return answer;
+        });
+        return(
+            <DataTable
+                columns={columns}
+                data={array}
+                pagination
+                responsive
+                noTableHead
+            />
+        );
+
+    }
+
+    render(){
+        return(
+            this.state.survey ? (
+                    <Row>
+                        <Col>
+                            <h2>{this.state.survey.title}</h2>
+                            <p><strong>URL:</strong> {window.location.origin + "/" + this.state.survey.url}</p>
+                            <h3>Questions</h3>
+                            {!this.state.survey.questions ? (
+                                "There are no Questions"
+                            ) : (
+                                this.renderQuestions(this.state.survey.questions)
+                            )
+                            }
+                            <h3>Answers</h3>
+                            {!this.state.survey.answers ? (
+                                "There are no Answers"
+                            ) : (
+                                this.renderAnswers(this.state.survey.answers)
+                            )
+                            }
+                        </Col>
+                    </Row>
+                ) : (
+                    <NoMatch />
+                )
+
+        );
+    }
+}
+
+export default Survey;

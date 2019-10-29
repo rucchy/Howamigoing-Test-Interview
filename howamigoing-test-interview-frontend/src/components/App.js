@@ -16,6 +16,9 @@ import {
 } from "react-router-dom";
 import Home from "./Home";
 import Surveys from "./Surveys";
+import Survey from "./Survey";
+import NoMatch from "./NoMatch";
+import Answer from "./Answer";
 
 class App extends Component {
   constructor(props) {
@@ -56,6 +59,11 @@ class App extends Component {
                 </Route>
                 <Route path="/surveys">
                   <Surveys />
+                </Route>
+                <Route path="/survey/:id" component={Survey} />
+                <Route path="/answer/:id" component={Answer} />
+                <Route path="*">
+                  <NoMatch />
                 </Route>
               </Switch>
             </Container>

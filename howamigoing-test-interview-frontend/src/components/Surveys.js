@@ -32,8 +32,7 @@ class Surveys extends Component{
     constructor(props){
         super(props);
         this.state = {
-            surveys: "",
-            filteredItems: ""
+            surveys: ""
         };
     }
 
@@ -60,7 +59,7 @@ class Surveys extends Component{
         return (
             <Row>
                 <Col>
-                    <p className={"text-center"}>List of Surveys</p>
+                    <h1 className={"text-center"}>List of Surveys</h1>
                     {this.state.surveys.length === 0 ? (
                         <p>There are no surveys created</p>
                     ) : (
@@ -69,6 +68,7 @@ class Surveys extends Component{
                             data={this.state.surveys}
                             pagination
                             responsive
+                            noTableHead
                         />
                     )}
 
