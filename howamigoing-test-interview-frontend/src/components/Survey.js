@@ -29,7 +29,7 @@ class Survey extends Component{
             survey: ""
         };
     }
-    componentWillMount() {
+    componentDidMount() {
         let url = "http://localhost:3001/survey/" + this.props.match.params.id;
         fetch(url)
             .then(res => res.json())

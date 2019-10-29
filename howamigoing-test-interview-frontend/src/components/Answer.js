@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NoMatch from "./NoMatch";
 import ListGroup from "reactstrap/es/ListGroup";
 import ListGroupItem from "reactstrap/es/ListGroupItem";
-import StarRatingComponent from 'react-star-rating-component';
+import Rating from "react-rating";
 
 class Answer extends Component{
     constructor(props){
@@ -30,10 +30,12 @@ class Answer extends Component{
                                 <p><strong>Question:</strong> {answer.question}</p>
                                 {answer.questionType === "Text" ?
                                     <div><strong>Answer:</strong> {answer.answer}</div> :
-                                    <StarRatingComponent
-                                        editing={false}
+                                    <Rating
+                                        readonly
                                         startCount={5}
-                                        value={answer.answer}
+                                        initialRating={answer.answer}
+                                        emptySymbol={<img src="/assets/images/star-empty.png" className="icon" />}
+                                        fullSymbol={<img src="/assets/images/star.png" className="icon" />}
                                     />
                                 }
 
