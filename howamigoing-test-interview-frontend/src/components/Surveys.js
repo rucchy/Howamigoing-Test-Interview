@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Col, Row} from 'reactstrap';
+import {Col, Row, Alert} from 'reactstrap';
 import DataTable from 'react-data-table-component';
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const columns = [
     {
@@ -32,7 +32,7 @@ class Surveys extends Component{
     constructor(props){
         super(props);
         this.state = {
-            surveys: ""
+            surveys: "",
         };
     }
 
@@ -56,9 +56,17 @@ class Surveys extends Component{
 
 
     render(){
+        const query = new URLSearchParams(window.location.search);
         return (
             <Row>
                 <Col>
+                    {query.get("new") ? (
+                        <Alert color="success">
+                            Survey added!
+                        </Alert>
+                    ) : (
+                        ""
+                    )}
                     <h1 className={"text-center"}>List of Surveys</h1>
                     {this.state.surveys.length === 0 ? (
                         <p>There are no surveys created</p>
