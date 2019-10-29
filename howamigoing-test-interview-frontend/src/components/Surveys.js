@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Col, Row, Alert} from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import {Link} from "react-router-dom";
+import Loader from "react-loader-spinner";
 
 const columns = [
     {
@@ -33,6 +34,7 @@ class Surveys extends Component{
         super(props);
         this.state = {
             surveys: "",
+            loading:true,
         };
     }
 
@@ -51,7 +53,8 @@ class Surveys extends Component{
                         return survey;
                     }
                 );
-                this.setState({surveys: array})
+                this.setState({surveys: array,
+                loading:false})
                 }
             )
             .catch(err => err);
@@ -61,29 +64,43 @@ class Surveys extends Component{
     render(){
         const query = new URLSearchParams(window.location.search);
         return (
-            <Row>
-                <Col>
-                    {query.get("new") ? (
-                        <Alert color="success">
-                            Survey added!
-                        </Alert>
-                    ) : (
-                        ""
-                    )}
-                    <h1 className={"text-center"}>List of Surveys</h1>
-                    {this.state.surveys.length === 0 ? (
-                        <p>There are no surveys created</p>
-                    ) : (
-                        <DataTable
-                            columns={columns}
-                            data={this.state.surveys}
-                            pagination
-                            responsive
-                        />
-                    )}
+            this.state.loading ? (
+                <Row>
+                    <Col className={"text-center"}>
+                        <Loader
+                            type="ThreeDots"
+                            color="#00BFFF"
+                            height={100}
+                            width={100}
 
-                </Col>
-            </Row>
+                        />
+                    </Col>
+                </Row>
+                 ) : (
+                <Row>
+                    <Col>
+                        {query.get("new") ? (
+                            <Alert color="success">
+                                Survey added!
+                            </Alert>
+                        ) : (
+                            ""
+                        )}
+                        <h1 className={"text-center"}>List of Surveys</h1>
+                        {this.state.surveys.length === 0 ? (
+                            <p>There are no surveys created</p>
+                        ) : (
+                            <DataTable
+                                columns={columns}
+                                data={this.state.surveys}
+                                pagination
+                                responsive
+                            />
+                        )}
+
+                    </Col>
+                </Row>
+            )
         );
     }
 }
