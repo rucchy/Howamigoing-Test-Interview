@@ -19,6 +19,7 @@ import Surveys from "./Surveys";
 import Survey from "./Survey";
 import NoMatch from "./NoMatch";
 import Answer from "./Answer";
+import SurveyForm from "./SurveyForm";
 
 class App extends Component {
   constructor(props) {
@@ -59,6 +60,9 @@ class App extends Component {
                 </Route>
                 <Route path="/surveys">
                   <Surveys />
+                </Route>
+                <Route path="/survey/add">
+                  <SurveyForm />
                 </Route>
                 <Route path="/survey/:id" component={Survey} />
                 <Route path="/answer/:id" component={Answer} />

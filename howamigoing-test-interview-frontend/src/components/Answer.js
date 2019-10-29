@@ -34,8 +34,8 @@ class Answer extends Component{
                                         readonly
                                         startCount={5}
                                         initialRating={answer.answer}
-                                        emptySymbol={<img src="/assets/images/star-empty.png" className="icon" />}
-                                        fullSymbol={<img src="/assets/images/star.png" className="icon" />}
+                                        emptySymbol={<img src="/assets/images/star-empty.png" alt="empty star" className="icon" />}
+                                        fullSymbol={<img src="/assets/images/star.png" alt="star" className="icon" />}
                                     />
                                 }
 
