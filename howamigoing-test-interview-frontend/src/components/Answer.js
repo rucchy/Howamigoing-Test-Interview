@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NoMatch from "./NoMatch";
-import ListGroup from "reactstrap/es/ListGroup";
-import ListGroupItem from "reactstrap/es/ListGroupItem";
+import { Row, Col, ListGroupItem, ListGroup} from 'reactstrap';
 import Rating from "react-rating";
 
 class Answer extends Component{
@@ -51,12 +50,14 @@ class Answer extends Component{
     render() {
         return(
             this.state.answer ? (
-                <div>
-                    <h1>Answer to: <strong>{this.state.answer[0].surveyTitle}</strong></h1>
-                    <p>by: <strong>{this.state.answer[0].email ? (this.state.answer[0].email) : ( "Anonimous" )}</strong></p>
-                    <p>URL: <strong>{window.location.origin + "/" +this.state.answer[0].surveyURL}</strong></p>
-                    {this.renderQuestionsAnswers(this.state.answer)}
-                </div>
+                <Row>
+                    <Col>
+                        <h1>Answer to: <strong>{this.state.answer[0].surveyTitle}</strong></h1>
+                        <p>by: <strong>{this.state.answer[0].email ? (this.state.answer[0].email) : ( "Anonimous" )}</strong></p>
+                        <p>URL: <strong>{window.location.origin + "/respondant/" +this.state.answer[0].surveyURL}</strong></p>
+                        {this.renderQuestionsAnswers(this.state.answer)}
+                    </Col>
+                </Row>
             ) : (
                 <NoMatch />
             )

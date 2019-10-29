@@ -78,7 +78,6 @@ class Survey extends Component{
                 data={array}
                 pagination
                 responsive
-                noTableHead
             />
         );
 
@@ -90,7 +89,7 @@ class Survey extends Component{
                     <Row>
                         <Col>
                             <h2>{this.state.survey.title}</h2>
-                            <p><strong>URL:</strong> {window.location.origin + "/" + this.state.survey.url}</p>
+                            <p><strong>URL:</strong> {window.location.origin + "/respondant/" + this.state.survey.url}</p>
                             <h3>Questions</h3>
                             {!this.state.survey.questions ? (
                                 "There are no Questions"

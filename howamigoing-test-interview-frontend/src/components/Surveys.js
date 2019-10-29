@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Col, Row, Alert} from 'reactstrap';
 import DataTable from 'react-data-table-component';
-import {Link, useLocation} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const columns = [
     {
@@ -41,7 +41,10 @@ class Surveys extends Component{
             .then(res => res.json())
             .then( res => {
                 let array = res.map(function(survey){
-                        survey.url = window.location.origin + "/" + survey.url;
+                        const url = "respondant/" + survey.url;
+                        survey.url = (<Link to={{
+                            pathname: url
+                        }}>{window.location.origin + "/" + url}</Link>);
                         survey.details = (<Link to={{
                             pathname: `/survey/${survey.id}`,
                         }}>Details</Link>);
@@ -76,7 +79,6 @@ class Surveys extends Component{
                             data={this.state.surveys}
                             pagination
                             responsive
-                            noTableHead
                         />
                     )}
 

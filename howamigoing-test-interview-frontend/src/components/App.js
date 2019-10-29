@@ -20,6 +20,8 @@ import Survey from "./Survey";
 import NoMatch from "./NoMatch";
 import Answer from "./Answer";
 import SurveyForm from "./SurveyForm";
+import SurveyRespondant from "./SurveyRespondant";
+import SurveyCorrect from "./SurveyCorrect";
 
 class App extends Component {
   constructor(props) {
@@ -58,14 +60,16 @@ class App extends Component {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route path="/surveys">
+                <Route exact path="/surveys">
                   <Surveys />
                 </Route>
-                <Route path="/survey/add">
+                <Route exact path="/survey/add">
                   <SurveyForm />
                 </Route>
-                <Route path="/survey/:id" component={Survey} />
-                <Route path="/answer/:id" component={Answer} />
+                <Route exact path="/survey/:id" component={Survey} />
+                <Route exact path="/answer/:id" component={Answer} />
+                <Route path="/respondant/:url" component={SurveyRespondant} />
+                <Route exact path="/survey-completed" component={SurveyCorrect} />
                 <Route path="*">
                   <NoMatch />
                 </Route>

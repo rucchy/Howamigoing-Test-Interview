@@ -163,7 +163,7 @@ class SurveyForm extends Component{
                             <Label for="url">URL</Label>
                             <div className={"d-flex align-items-center"}>
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text">{window.location.origin}/</span>
+                                    <span className="input-group-text">{window.location.origin}/respondant/</span>
                                 </div>
                                 <Input type="text" name="url" id="url" required onChange={(e) => this.handleChange("url", e)} />
                             </div>
@@ -173,7 +173,7 @@ class SurveyForm extends Component{
 
                                 <FormGroup>
                                     <Label for="question">Question 1</Label>
-                                    <Input rows="3" type="textarea" name="question[]" id="question" maxLength="300" required onChange={(e) => this.handleChange("question1", e)} />
+                                    <Input rows="3" type="textarea" name="question[]" id="question" required onChange={(e) => this.handleChange("question1", e)} />
                                 </FormGroup>
                             </Col>
                             <Col md={2}>
@@ -190,7 +190,7 @@ class SurveyForm extends Component{
                             return (<FormGroup key={i} row className={"align-items-center"}>
                                 <Label xs={12} for="question">Question {i+2}</Label>
                                 <Col md={8}>
-                                    <textarea rows="3" className={"form-control"} type="textarea" name="question[]" maxLength="300"
+                                    <textarea rows="3" className={"form-control"} type="textarea" name="question[]"
                                               ref={(ref) => this.myRefs["question-"+question.id] = ref}
                                               id={"question-"+question.id}
                                               defaultValue={question.text}
