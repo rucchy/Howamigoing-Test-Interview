@@ -4,7 +4,7 @@ Code written by Chema Ruano Fernández for Howamigoing.
 
 ## Description
 This code is for the technical interview of Howamigoing. The objective is to develop a simple anonymous online survey tool like Google Forms.
-Here is the complete description of the exercise: [https://hackmd.io/opKe7uyPSVmYuSTDb7hcrQ] (https://hackmd.io/opKe7uyPSVmYuSTDb7hcrQ).
+Here is the complete description of the exercise: https://hackmd.io/opKe7uyPSVmYuSTDb7hcrQ]
 
 There are two folder: one for the frontend and one for the backend.
 
